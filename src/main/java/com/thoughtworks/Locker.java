@@ -24,6 +24,7 @@ public class Locker {
 
     public void takePackage(Ticket ticket) {
         if (list.contains(ticket)) {
+            list.remove(ticket);
             return;
         }
         throw new RuntimeException("非法票据");
