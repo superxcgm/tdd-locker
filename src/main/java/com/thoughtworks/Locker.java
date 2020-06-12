@@ -1,8 +1,12 @@
 package com.thoughtworks;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Locker {
     private int capacity;
     private int packages = 0;
+    private List<Ticket> list = new ArrayList<>();
 
     public Locker(int capacity) {
         this.capacity = capacity;
@@ -13,10 +17,15 @@ public class Locker {
             throw new RuntimeException("储物柜已满");
         }
         packages++;
-        return new Ticket();
+        Ticket ticket = Ticket.getNextTick();
+        list.add(ticket);
+        return ticket;
     }
 
-    public boolean takePackage(Ticket ticket) {
-        return true;
+    public void takePackage(Ticket ticket) {
+        if (list.contains(ticket)) {
+            return;
+        }
+        throw new RuntimeException("非法票据");
     }
 }

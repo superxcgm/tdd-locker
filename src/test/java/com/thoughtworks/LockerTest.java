@@ -27,6 +27,13 @@ public class LockerTest {
         Locker locker = new Locker(1);
         Ticket ticket = locker.storePackage();
 
-        Assertions.assertTrue(locker.takePackage(ticket));
+        Assertions.assertDoesNotThrow(() -> locker.takePackage(ticket));
+    }
+
+    @Test
+    void should_throw_exception_when_take_package_given_fake_ticket() {
+        Locker locker = new Locker(1);
+
+        Assertions.assertThrows(RuntimeException.class, () -> locker.takePackage(new Ticket(5)));
     }
 }
