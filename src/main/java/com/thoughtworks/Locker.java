@@ -15,4 +15,8 @@ public class Locker {
         packages++;
         return new Ticket();
     }
+
+    public boolean takePackage(Ticket ticket) {
+        return true;
+    }
 }
