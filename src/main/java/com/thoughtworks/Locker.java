@@ -5,7 +5,6 @@ import java.util.List;
 
 public class Locker {
     private int capacity;
-    private int packages = 0;
     private List<Ticket> list = new ArrayList<>();
 
     public Locker(int capacity) {
@@ -13,10 +12,9 @@ public class Locker {
     }
 
     public Ticket storePackage() {
-        if (packages >= capacity) {
+        if (list.size() >= capacity) {
             throw new RuntimeException("储物柜已满");
         }
-        packages++;
         Ticket ticket = Ticket.getNextTick();
         list.add(ticket);
         return ticket;
