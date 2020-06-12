@@ -1,11 +1,18 @@
 package com.thoughtworks;
 
 public class Locker {
-    public Locker(int capacity) {
+    private int capacity;
+    private int packages = 0;
 
+    public Locker(int capacity) {
+        this.capacity = capacity;
     }
 
-    public Ticket storePacke() {
+    public Ticket storePackage() {
+        if (packages >= capacity) {
+            throw new RuntimeException("储物柜已满");
+        }
+        packages++;
         return new Ticket();
     }
 }
