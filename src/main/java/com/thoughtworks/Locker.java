@@ -29,4 +29,8 @@ public class Locker {
         }
         throw new TicketInvalidException();
     }
+
+    public Boolean available() {
+        return items.size() < capacity;
+    }
 }

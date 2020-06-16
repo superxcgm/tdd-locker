@@ -7,6 +7,11 @@ public class LockerRobot {
     }
 
     public Ticket storePackage(MPackage mPackage) {
-        return lockers[0].storePackage(mPackage);
+        for (Locker locker: lockers) {
+            if (locker.available()) {
+                return locker.storePackage(mPackage);
+            }
+        }
+        return null;
     }
 }
