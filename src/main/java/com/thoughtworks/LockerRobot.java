@@ -21,6 +21,6 @@ public class LockerRobot {
                 return locker.takePackage(ticket);
             }
         }
-        return null;
+        throw new TicketInvalidException();
     }
 }

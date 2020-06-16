@@ -49,5 +49,13 @@ public class LockerRobotTest {
         Assertions.assertTrue(gotPackage == mPackage);
     }
 
+    @Test
+    void should_throw_exception_when_take_package_given_the_ticket_is_unavailable() {
+        Locker[] lockers = new Locker[]{new Locker(2), new Locker(2)};
+        LockerRobot lockerRobot = new LockerRobot(lockers);
+        MPackage mPackage = new MPackage("");
+        lockerRobot.storePackage(mPackage);
 
+        Assertions.assertThrows(TicketInvalidException.class, () -> lockerRobot.tackPackage(new Ticket(911)));
+    }
 }
