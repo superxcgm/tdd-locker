@@ -43,6 +43,6 @@ public class LockerTest {
         Ticket ticket = locker.storePackage();
         locker.takePackage(ticket);
 
-        Assertions.assertThrows(RuntimeException.class, () -> locker.takePackage(ticket));
+        Assertions.assertThrows(TicketInvalidException.class, () -> locker.takePackage(ticket));
     }
 }
