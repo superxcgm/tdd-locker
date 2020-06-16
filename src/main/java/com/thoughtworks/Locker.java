@@ -25,6 +25,6 @@ public class Locker {
             list.remove(ticket);
             return;
         }
-        throw new RuntimeException("非法票据");
+        throw new TicketInvalidException();
     }
 }

@@ -34,7 +34,7 @@ public class LockerTest {
     void should_throw_exception_when_take_package_given_fake_ticket() {
         Locker locker = new Locker(1);
 
-        Assertions.assertThrows(RuntimeException.class, () -> locker.takePackage(new Ticket(5)));
+        Assertions.assertThrows(TicketInvalidException.class, () -> locker.takePackage(new Ticket(5)));
     }
 
     @Test
