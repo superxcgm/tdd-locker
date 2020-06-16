@@ -15,7 +15,7 @@ public class Locker {
     }
 
     public Ticket storePackage(MPackage mPackage) {
-        if (items.size() >= capacity) {
+        if (!available()) {
             throw new LockerFullException();
         }
         Ticket ticket = Ticket.getNextTick();
@@ -24,7 +24,7 @@ public class Locker {
     }
 
     public MPackage takePackage(Ticket ticket) {
-        if (items.containsKey(ticket)) {
+        if (checkTicket(ticket)) {
             MPackage mPackage = items.get(ticket);
             items.remove(ticket);
             return mPackage;
