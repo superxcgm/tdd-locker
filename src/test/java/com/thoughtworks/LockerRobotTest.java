@@ -13,7 +13,7 @@ public class LockerRobotTest {
         Ticket ticket = lockerRobot.storePackage(mPackage);
 
         Assertions.assertNotNull(ticket);
-        Assertions.assertTrue(lockers[0].takePackage(ticket).equals(mPackage));
+        Assertions.assertTrue(lockers[0].checkTicket(ticket));
     }
 
     @Test
@@ -25,7 +25,7 @@ public class LockerRobotTest {
         Ticket ticket = lockerRobot.storePackage(mPackage);
 
         Assertions.assertNotNull(ticket);
-        Assertions.assertTrue(lockers[1].takePackage(ticket).equals(mPackage));
+        Assertions.assertTrue(lockers[1].checkTicket(ticket));
     }
 
     @Test
@@ -46,7 +46,7 @@ public class LockerRobotTest {
         Ticket ticket = lockerRobot.storePackage(mPackage);
 
         MPackage gotPackage = lockerRobot.tackPackage(ticket);
-        Assertions.assertTrue(gotPackage == mPackage);
+        Assertions.assertTrue(gotPackage.equals(mPackage));
     }
 
     @Test
