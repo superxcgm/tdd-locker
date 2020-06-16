@@ -1,10 +1,6 @@
 package com.thoughtworks;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
-
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class Locker {
