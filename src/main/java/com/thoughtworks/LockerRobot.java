@@ -1,7 +1,7 @@
 package com.thoughtworks;
 
 public class LockerRobot {
-    Locker[] lockers;
+    private Locker[] lockers;
     public LockerRobot(Locker[] lockers) {
         this.lockers = lockers;
     }

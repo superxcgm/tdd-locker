@@ -3,7 +3,7 @@ package com.thoughtworks;
 import java.util.Objects;
 
 public class MPackage {
-    String name;
+    private String name;
     MPackage(String name) {
         this.name = name;
     }
