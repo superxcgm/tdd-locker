@@ -12,6 +12,6 @@ public class LockerRobot {
                 return locker.storePackage(mPackage);
             }
         }
-        return null;
+        throw new LockerFullException();
     }
 }

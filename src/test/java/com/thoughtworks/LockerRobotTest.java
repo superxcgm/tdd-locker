@@ -27,4 +27,13 @@ public class LockerRobotTest {
         Assertions.assertNotNull(ticket);
         Assertions.assertTrue(lockers[1].takePackage(ticket).equals(mPackage));
     }
+
+    @Test
+    void should_throws_exception_when_store_package_given_the_lockers_all_full() {
+        Locker[] lockers = new Locker[]{new Locker(0), new Locker(0)};
+        LockerRobot lockerRobot = new LockerRobot(lockers);
+        MPackage mPackage = new MPackage("");
+
+        Assertions.assertThrows(LockerFullException.class, () -> lockerRobot.storePackage(mPackage));
+    }
 }
