@@ -19,7 +19,7 @@ public class LockerTest {
         Locker locker = new Locker(1);
         locker.storePackage();
 
-        Assertions.assertThrows(RuntimeException.class, () -> locker.storePackage());
+        Assertions.assertThrows(LockerFullException.class, () -> locker.storePackage());
     }
 
     @Test

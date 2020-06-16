@@ -13,7 +13,7 @@ public class Locker {
 
     public Ticket storePackage() {
         if (list.size() >= capacity) {
-            throw new RuntimeException("储物柜已满");
+            throw new LockerFullException();
         }
         Ticket ticket = Ticket.getNextTick();
         list.add(ticket);
