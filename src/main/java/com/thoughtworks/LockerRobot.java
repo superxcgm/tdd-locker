@@ -14,4 +14,13 @@ public class LockerRobot {
         }
         throw new LockerFullException();
     }
+
+    public MPackage tackPackage(Ticket ticket) {
+        for (Locker locker: lockers) {
+            if (locker.checkTicket(ticket)) {
+                return locker.takePackage(ticket);
+            }
+        }
+        return null;
+    }
 }

@@ -1,5 +1,7 @@
 package com.thoughtworks;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -32,5 +34,9 @@ public class Locker {
 
     public Boolean available() {
         return items.size() < capacity;
+    }
+
+    public Boolean checkTicket(Ticket ticket) {
+        return items.containsKey(ticket);
     }
 }
