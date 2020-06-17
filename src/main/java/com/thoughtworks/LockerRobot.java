@@ -6,19 +6,19 @@ public class LockerRobot {
         this.lockers = lockers;
     }
 
-    public Ticket storePackage(MPackage mPackage) {
+    public Ticket storeBag(Bag bag) {
         for (Locker locker: lockers) {
             if (locker.available()) {
-                return locker.storePackage(mPackage);
+                return locker.storeBag(bag);
             }
         }
         throw new LockerFullException();
     }
 
-    public MPackage tackPackage(Ticket ticket) {
+    public Bag takeBag(Ticket ticket) {
         for (Locker locker: lockers) {
             if (locker.checkTicket(ticket)) {
-                return locker.takePackage(ticket);
+                return locker.takeBag(ticket);
             }
         }
         throw new TicketInvalidException();

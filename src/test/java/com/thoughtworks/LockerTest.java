@@ -6,58 +6,58 @@ import org.junit.jupiter.api.Test;
 public class LockerTest {
 
     @Test
-    void should_return_ticket_when_store_package_given_locker_not_full() {
+    void should_return_ticket_when_store_bag_given_locker_not_full() {
         Locker locker = new Locker(1);
 
-        Ticket ticket = locker.storePackage(new MPackage(""));
+        Ticket ticket = locker.storeBag(new Bag(""));
 
         Assertions.assertNotNull(ticket);
     }
 
     @Test
-    void should_throw_exception_when_store_package_given_locker_full() {
+    void should_throw_exception_when_store_bag_given_locker_full() {
         Locker locker = new Locker(1);
-        locker.storePackage(new MPackage(""));
+        locker.storeBag(new Bag(""));
 
-        Assertions.assertThrows(LockerFullException.class, () -> locker.storePackage(new MPackage("")));
+        Assertions.assertThrows(LockerFullException.class, () -> locker.storeBag(new Bag("")));
     }
 
     @Test
-    void should_take_package_success_when_take_package_given_ticket_valid() {
+    void should_take_bag_success_when_take_bag_given_ticket_valid() {
         Locker locker = new Locker(1);
-        MPackage mPackage = new MPackage("");
-        Ticket ticket = locker.storePackage(mPackage);
+        Bag bag = new Bag("");
+        Ticket ticket = locker.storeBag(bag);
 
-        MPackage gotPackage = locker.takePackage(ticket);
+        Bag gotbag = locker.takeBag(ticket);
 
-        Assertions.assertTrue(mPackage.equals(gotPackage));
+        Assertions.assertTrue(bag.equals(gotbag));
     }
 
     @Test
-    void should_take_the_correct_package_when_take_package_given_ticket_valid() {
+    void should_take_the_correct_bag_when_take_bag_given_ticket_valid() {
         Locker locker = new Locker(2);
-        MPackage onePackage = new MPackage("123");
-        MPackage twoPackage = new MPackage("456");
+        Bag onebag = new Bag("123");
+        Bag twobag = new Bag("456");
 
-        Ticket oneTicket = locker.storePackage(onePackage);
-        MPackage gotPackage = locker.takePackage(oneTicket);
+        Ticket oneTicket = locker.storeBag(onebag);
+        Bag gotbag = locker.takeBag(oneTicket);
 
-        Assertions.assertFalse(gotPackage.equals(twoPackage));
+        Assertions.assertFalse(gotbag.equals(twobag));
     }
 
     @Test
-    void should_throw_exception_when_take_package_given_fake_ticket() {
+    void should_throw_exception_when_take_bag_given_fake_ticket() {
         Locker locker = new Locker(1);
 
-        Assertions.assertThrows(TicketInvalidException.class, () -> locker.takePackage(new Ticket(5)));
+        Assertions.assertThrows(TicketInvalidException.class, () -> locker.takeBag(new Ticket(5)));
     }
 
     @Test
-    void should_throw_exception_when_take_package_given_used_ticket() {
+    void should_throw_exception_when_take_bag_given_used_ticket() {
         Locker locker = new Locker(1);
-        Ticket ticket = locker.storePackage(new MPackage(""));
-        locker.takePackage(ticket);
+        Ticket ticket = locker.storeBag(new Bag(""));
+        locker.takeBag(ticket);
 
-        Assertions.assertThrows(TicketInvalidException.class, () -> locker.takePackage(ticket));
+        Assertions.assertThrows(TicketInvalidException.class, () -> locker.takeBag(ticket));
     }
 }

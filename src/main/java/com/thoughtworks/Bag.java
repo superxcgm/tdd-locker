@@ -2,9 +2,9 @@ package com.thoughtworks;
 
 import java.util.Objects;
 
-public class MPackage {
+public class Bag {
     private String name;
-    MPackage(String name) {
+    Bag(String name) {
         this.name = name;
     }
 
@@ -12,8 +12,8 @@ public class MPackage {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        MPackage mPackage = (MPackage) o;
-        return Objects.equals(name, mPackage.name);
+        Bag bag = (Bag) o;
+        return Objects.equals(name, bag.name);
     }
 
     @Override
