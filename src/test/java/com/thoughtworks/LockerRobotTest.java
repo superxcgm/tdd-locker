@@ -57,4 +57,14 @@ public class LockerRobotTest {
 
         Assertions.assertEquals(got_package, mPackage);
     }
+
+    @Test
+    void should_hint_ticket_invalid_when_take_package_given_a_fake_ticket() {
+        Locker firstLocker = new Locker(1);
+        Locker secondLocker = new Locker(1);
+        LockerRobot robot = new LockerRobot(Arrays.asList(firstLocker, secondLocker));
+        Ticket fakeTicket = new Ticket(666);
+
+        Assertions.assertThrows(TicketInvalidException.class, () -> robot.takePackage(fakeTicket));
+    }
 }

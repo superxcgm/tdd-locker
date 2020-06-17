@@ -36,6 +36,10 @@ public class LockerRobot {
 
             }
         }
+
+        if (mPackage == null) {
+            throw new TicketInvalidException();
+        }
         return mPackage;
     }
 }
