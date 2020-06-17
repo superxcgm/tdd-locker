@@ -1,29 +1,30 @@
 package com.thoughtworks;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Locker {
     private int capacity;
-    private List<Ticket> list = new ArrayList<>();
+    private Map<Ticket, MPackage> packages = new HashMap<>();
 
     public Locker(int capacity) {
         this.capacity = capacity;
     }
 
-    public Ticket storePackage() {
-        if (list.size() >= capacity) {
+    public Ticket storePackage(MPackage mPackage) {
+        if (packages.size() >= capacity) {
             throw new LockerFullException();
         }
         Ticket ticket = Ticket.getNextTick();
-        list.add(ticket);
+        packages.put(ticket, mPackage);
         return ticket;
     }
 
-    public void takePackage(Ticket ticket) {
-        if (list.contains(ticket)) {
-            list.remove(ticket);
-            return;
+    public MPackage takePackage(Ticket ticket) {
+        if (packages.containsKey(ticket)) {
+            MPackage mPackage = packages.get(ticket);
+            packages.remove(ticket);
+            return mPackage;
         }
         throw new TicketInvalidException();
     }
