@@ -9,6 +9,16 @@ public class LockerRobot {
     }
 
     public Ticket store(MPackage mPackage) {
-        return lockers.get(0).storePackage(mPackage);
+        Ticket ticket = null;
+        for (Locker locker: lockers) {
+            try {
+                ticket = locker.storePackage(mPackage);
+                break;
+            }catch (LockerFullException e) {
+
+            }
+        }
+
+        return ticket;
     }
 }
