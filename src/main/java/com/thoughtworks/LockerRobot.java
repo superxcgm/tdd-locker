@@ -19,6 +19,10 @@ public class LockerRobot {
             }
         }
 
+        if (ticket == null) {
+            throw new LockerFullException();
+        }
+
         return ticket;
     }
 }
