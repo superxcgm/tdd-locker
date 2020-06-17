@@ -4,17 +4,18 @@ import java.util.List;
 
 public class LockerRobot {
     private List<Locker> lockers;
+
     public LockerRobot(List<Locker> lockers) {
         this.lockers = lockers;
     }
 
-    public Ticket store(MPackage mPackage) {
+    public Ticket storePackage(MPackage mPackage) {
         Ticket ticket = null;
-        for (Locker locker: lockers) {
+        for (Locker locker : lockers) {
             try {
                 ticket = locker.storePackage(mPackage);
                 break;
-            }catch (LockerFullException e) {
+            } catch (LockerFullException e) {
 
             }
         }
@@ -24,5 +25,17 @@ public class LockerRobot {
         }
 
         return ticket;
+    }
+
+    public MPackage takePackage(Ticket ticket) {
+        MPackage mPackage = null;
+        for (Locker locker : lockers) {
+            try {
+                mPackage = locker.takePackage(ticket);
+            } catch (TicketInvalidException e) {
+
+            }
+        }
+        return mPackage;
     }
 }

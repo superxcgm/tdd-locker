@@ -12,7 +12,7 @@ public class LockerRobotTest {
         LockerRobot robot = new LockerRobot(Arrays.asList(firstLocker, new Locker(3)));
         MPackage mPackage = new MPackage("");
 
-        Ticket ticket = robot.store(mPackage);
+        Ticket ticket = robot.storePackage(mPackage);
 
         Assertions.assertNotNull(ticket);
         Assertions.assertEquals(mPackage, firstLocker.takePackage(ticket));
@@ -25,9 +25,9 @@ public class LockerRobotTest {
         LockerRobot robot = new LockerRobot(Arrays.asList(firstLocker, secondLocker));
         MPackage mPackage1 = new MPackage("1");
         MPackage mPackage2 = new MPackage("2");
-        robot.store(mPackage1);
+        robot.storePackage(mPackage1);
 
-        Ticket ticket = robot.store(mPackage2);
+        Ticket ticket = robot.storePackage(mPackage2);
 
         Assertions.assertNotNull(ticket);
         Assertions.assertEquals(mPackage2, secondLocker.takePackage(ticket));
@@ -39,9 +39,22 @@ public class LockerRobotTest {
         Locker secondLocker = new Locker(1);
         LockerRobot robot = new LockerRobot(Arrays.asList(firstLocker, secondLocker));
 
-        robot.store(new MPackage("1"));
-        robot.store(new MPackage("2"));
+        robot.storePackage(new MPackage("1"));
+        robot.storePackage(new MPackage("2"));
 
-        Assertions.assertThrows(LockerFullException.class, () -> robot.store(new MPackage("3")));
+        Assertions.assertThrows(LockerFullException.class, () -> robot.storePackage(new MPackage("3")));
+    }
+
+    @Test
+    void should_get_correct_package_when_take_package_given_a_valid_ticket() {
+        Locker firstLocker = new Locker(1);
+        Locker secondLocker = new Locker(1);
+        LockerRobot robot = new LockerRobot(Arrays.asList(firstLocker, secondLocker));
+        MPackage mPackage = new MPackage("1");
+        Ticket ticket = robot.storePackage(mPackage);
+
+        MPackage got_package = robot.takePackage(ticket);
+
+        Assertions.assertEquals(got_package, mPackage);
     }
 }
