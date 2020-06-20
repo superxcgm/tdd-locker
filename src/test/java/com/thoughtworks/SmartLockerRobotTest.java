@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class SmartLockerRobotTest {
 
@@ -78,5 +79,19 @@ public class SmartLockerRobotTest {
         SmartLockerRobot smartLockerRobot = new SmartLockerRobot(Arrays.asList(firstLocker, secondLocker));
 
         Assertions.assertThrows(TicketInvalidException.class, () -> smartLockerRobot.takeBag(new Ticket(0)));
+    }
+
+    @Test
+    void should_get_correct_bag_when_take_bag_from_SmartLockerRobot_given_ticket_is_taken_from_PrimaryLockerRobot() {
+        Locker firstLocker = new Locker(2);
+        Locker secondLocker = new Locker(2);
+        Bag bag = new Bag("1");
+        PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(new Locker[]{firstLocker, secondLocker});
+        SmartLockerRobot smartLockerRobot = new SmartLockerRobot(Arrays.asList(firstLocker, secondLocker));
+        Ticket ticket = primaryLockerRobot.storeBag(bag);
+
+        Bag gotBag = smartLockerRobot.takeBag(ticket);
+
+        Assertions.assertEquals(bag, gotBag);
     }
 }
