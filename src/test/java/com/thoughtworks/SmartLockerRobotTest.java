@@ -37,13 +37,24 @@ public class SmartLockerRobotTest {
     void should_return_ticket_and_store_bag_to_first_locker_when_store_bag_given_first_locker_have_same_free_space_with_second_locker() {
         Locker firstLocker = new Locker(2);
         Locker secondLocker = new Locker(2);
-        firstLocker.storeBag(new Bag(""));
-        secondLocker.storeBag(new Bag(""));
+        firstLocker.storeBag(new Bag("1"));
+        secondLocker.storeBag(new Bag("2"));
         SmartLockerRobot smartLockerRobot = new SmartLockerRobot(Arrays.asList(firstLocker, secondLocker));
 
-        Ticket ticket = smartLockerRobot.storeBag(new Bag("1"));
+        Ticket ticket = smartLockerRobot.storeBag(new Bag("3"));
 
         Assertions.assertNotNull(ticket);
         Assertions.assertTrue(firstLocker.isReleasedTicket(ticket));
+    }
+
+    @Test
+    void should_throw_LockerFullException_when_store_bag_given_all_locker_full() {
+        Locker firstLocker = new Locker(1);
+        Locker secondLocker = new Locker(1);
+        firstLocker.storeBag(new Bag("1"));
+        secondLocker.storeBag(new Bag("2"));
+        SmartLockerRobot smartLockerRobot = new SmartLockerRobot(Arrays.asList(firstLocker, secondLocker));
+
+        Assertions.assertThrows(LockerFullException.class, () -> smartLockerRobot.storeBag(new Bag("3")));
     }
 }
