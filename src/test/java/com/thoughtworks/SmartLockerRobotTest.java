@@ -95,4 +95,19 @@ public class SmartLockerRobotTest {
 
         Assertions.assertEquals(bag, gotBag);
     }
+
+    @Test
+    void should_get_correct_bag_when_take_bag_from_PrimaryLockerRobot_given_ticket_is_taken_from_SmartLockerRobot() {
+        Locker firstLocker = new Locker(2);
+        Locker secondLocker = new Locker(2);
+        Bag bag = new Bag("1");
+        List<Locker> lockers = Arrays.asList(firstLocker, secondLocker);
+        PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(lockers);
+        SmartLockerRobot smartLockerRobot = new SmartLockerRobot(lockers);
+        Ticket ticket = smartLockerRobot.storeBag(bag);
+
+        Bag gotBag = primaryLockerRobot.takeBag(ticket);
+
+        Assertions.assertEquals(bag, gotBag);
+    }
 }
