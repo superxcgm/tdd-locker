@@ -3,65 +3,65 @@ package com.thoughtworks;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class LockerRobotTest {
+public class PrimaryLockerRobotTest {
     @Test
     void should_store_to_the_first_locker_and_return_ticket_when_store_bag_given_the_first_locker_is_available() {
         Locker[] lockers = new Locker[]{new Locker(2), new Locker(2)};
-        LockerRobot lockerRobot = new LockerRobot(lockers);
+        PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(lockers);
         Bag bag = new Bag("");
 
-        Ticket ticket = lockerRobot.storeBag(bag);
+        Ticket ticket = primaryLockerRobot.storeBag(bag);
 
         Assertions.assertNotNull(ticket);
-        Assertions.assertTrue(lockers[0].checkTicket(ticket));
+        Assertions.assertTrue(lockers[0].isReleasedTicket(ticket));
     }
 
     @Test
     void should_store_to_the_second_locker_and_return_ticket_when_store_bag_given_the_first_locker_is_full() {
         Locker[] lockers = new Locker[]{new Locker(1), new Locker(2)};
-        LockerRobot lockerRobot = new LockerRobot(lockers);
+        PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(lockers);
         Bag bag = new Bag("1");
-        lockerRobot.storeBag(new Bag(""));
+        primaryLockerRobot.storeBag(new Bag(""));
 
-        Ticket ticket = lockerRobot.storeBag(bag);
+        Ticket ticket = primaryLockerRobot.storeBag(bag);
 
         Assertions.assertNotNull(ticket);
-        Assertions.assertTrue(lockers[1].checkTicket(ticket));
+        Assertions.assertTrue(lockers[1].isReleasedTicket(ticket));
     }
 
     @Test
     void should_throws_exception_when_store_bag_given_the_lockers_all_full() {
         Locker[] lockers = new Locker[]{new Locker(1), new Locker(1)};
-        LockerRobot lockerRobot = new LockerRobot(lockers);
-        lockerRobot.storeBag(new Bag("1"));
-        lockerRobot.storeBag(new Bag("2"));
+        PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(lockers);
+        primaryLockerRobot.storeBag(new Bag("1"));
+        primaryLockerRobot.storeBag(new Bag("2"));
         Bag bag = new Bag("3");
 
-        Assertions.assertThrows(LockerFullException.class, () -> lockerRobot.storeBag(bag));
+        Assertions.assertThrows(LockerFullException.class, () -> primaryLockerRobot.storeBag(bag));
     }
 
     @Test
     void should_take_the_correct_bag_when_take_bag_given_the_ticket_is_available() {
         Locker[] lockers = new Locker[]{new Locker(2), new Locker(2)};
-        LockerRobot lockerRobot = new LockerRobot(lockers);
+        PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(lockers);
         Bag bag = new Bag("");
 
-        Ticket ticket = lockerRobot.storeBag(bag);
+        Ticket ticket = primaryLockerRobot.storeBag(bag);
 
-        Bag got_bag = lockerRobot.takeBag(ticket);
-        Assertions.assertTrue(got_bag.equals(bag));
+        Bag gotBag = primaryLockerRobot.takeBag(ticket);
+        Assertions.assertEquals(gotBag, bag);
     }
 
     @Test
     void should_throw_exception_when_take_bag_given_the_ticket_is_unavailable() {
         Locker[] lockers = new Locker[]{new Locker(2), new Locker(2)};
-        LockerRobot lockerRobot = new LockerRobot(lockers);
+        PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(lockers);
         Bag bag = new Bag("");
-        lockerRobot.storeBag(bag);
+        primaryLockerRobot.storeBag(bag);
 
         Assertions.assertThrows(TicketInvalidException.class, () -> {
             Ticket fakeTicket = new Ticket(911);
-            lockerRobot.takeBag(fakeTicket);
+            primaryLockerRobot.takeBag(fakeTicket);
         });
     }
 }

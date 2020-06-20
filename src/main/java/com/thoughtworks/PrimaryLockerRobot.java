@@ -1,8 +1,8 @@
 package com.thoughtworks;
 
-public class LockerRobot {
+public class PrimaryLockerRobot {
     private Locker[] lockers;
-    public LockerRobot(Locker[] lockers) {
+    public PrimaryLockerRobot(Locker[] lockers) {
         this.lockers = lockers;
     }
 
@@ -17,7 +17,7 @@ public class LockerRobot {
 
     public Bag takeBag(Ticket ticket) {
         for (Locker locker: lockers) {
-            if (locker.checkTicket(ticket)) {
+            if (locker.isReleasedTicket(ticket)) {
                 return locker.takeBag(ticket);
             }
         }

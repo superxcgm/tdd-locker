@@ -3,9 +3,9 @@ package com.thoughtworks;
 import java.util.Objects;
 
 public class Bag {
-    private String name;
-    Bag(String name) {
-        this.name = name;
+    private String id;
+    Bag(String id) {
+        this.id = id;
     }
 
     @Override
@@ -13,11 +13,11 @@ public class Bag {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Bag bag = (Bag) o;
-        return Objects.equals(name, bag.name);
+        return Objects.equals(id, bag.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name);
+        return Objects.hash(id);
     }
 }

@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class Locker {
     private int capacity;
-    private Map<Ticket, Bag> items = new HashMap<>();
+    private Map<Ticket, Bag> ticketBagMap = new HashMap<>();
     public Locker(int capacity) {
         this.capacity = capacity;
     }
@@ -15,24 +15,24 @@ public class Locker {
             throw new LockerFullException();
         }
         Ticket ticket = Ticket.getNextTick();
-        items.put(ticket, bag);
+        ticketBagMap.put(ticket, bag);
         return ticket;
     }
 
     public Bag takeBag(Ticket ticket) {
-        if (checkTicket(ticket)) {
-            Bag bag = items.get(ticket);
-            items.remove(ticket);
+        if (isReleasedTicket(ticket)) {
+            Bag bag = ticketBagMap.get(ticket);
+            ticketBagMap.remove(ticket);
             return bag;
         }
         throw new TicketInvalidException();
     }
 
     public Boolean available() {
-        return items.size() < capacity;
+        return ticketBagMap.size() < capacity;
     }
 
-    public Boolean checkTicket(Ticket ticket) {
-        return items.containsKey(ticket);
+    public Boolean isReleasedTicket(Ticket ticket) {
+        return ticketBagMap.containsKey(ticket);
     }
 }
