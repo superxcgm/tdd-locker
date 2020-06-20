@@ -1,8 +1,10 @@
 package com.thoughtworks;
 
+import java.util.List;
+
 public class PrimaryLockerRobot {
-    private Locker[] lockers;
-    public PrimaryLockerRobot(Locker[] lockers) {
+    private List<Locker> lockers;
+    public PrimaryLockerRobot(List<Locker> lockers) {
         this.lockers = lockers;
     }
 

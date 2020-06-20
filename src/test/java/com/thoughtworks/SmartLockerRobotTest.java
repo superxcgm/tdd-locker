@@ -86,8 +86,9 @@ public class SmartLockerRobotTest {
         Locker firstLocker = new Locker(2);
         Locker secondLocker = new Locker(2);
         Bag bag = new Bag("1");
-        PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(new Locker[]{firstLocker, secondLocker});
-        SmartLockerRobot smartLockerRobot = new SmartLockerRobot(Arrays.asList(firstLocker, secondLocker));
+        List<Locker> lockers = Arrays.asList(firstLocker, secondLocker);
+        PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(lockers);
+        SmartLockerRobot smartLockerRobot = new SmartLockerRobot(lockers);
         Ticket ticket = primaryLockerRobot.storeBag(bag);
 
         Bag gotBag = smartLockerRobot.takeBag(ticket);
