@@ -1,6 +1,7 @@
 package com.thoughtworks;
 
 import java.util.List;
+import java.util.concurrent.locks.Lock;
 
 public class SmartLockerRobot {
     private List<Locker> lockers;
@@ -19,5 +20,14 @@ public class SmartLockerRobot {
         }
 
         return maxFreeSpaceLocker.storeBag(bag);
+    }
+
+    public Bag takeBag(Ticket ticket) {
+        for (Locker locker: lockers) {
+            if (locker.isReleasedTicket(ticket)) {
+                return locker.takeBag(ticket);
+            }
+        }
+        return null;
     }
 }

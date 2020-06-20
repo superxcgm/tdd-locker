@@ -57,4 +57,17 @@ public class SmartLockerRobotTest {
 
         Assertions.assertThrows(LockerFullException.class, () -> smartLockerRobot.storeBag(new Bag("3")));
     }
+
+    @Test
+    void should_get_correct_bag_when_take_bag_given_a_valid_ticket() {
+        Locker firstLocker = new Locker(2);
+        Locker secondLocker = new Locker(2);
+        Bag bag = new Bag("1");
+        SmartLockerRobot smartLockerRobot = new SmartLockerRobot(Arrays.asList(firstLocker, secondLocker));
+        Ticket ticket = smartLockerRobot.storeBag(bag);
+
+        Bag gotBag = smartLockerRobot.takeBag(ticket);
+
+        Assertions.assertEquals(bag, gotBag);
+    }
 }
