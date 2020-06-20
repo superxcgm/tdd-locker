@@ -28,6 +28,6 @@ public class SmartLockerRobot {
                 return locker.takeBag(ticket);
             }
         }
-        return null;
+        throw new TicketInvalidException();
     }
 }

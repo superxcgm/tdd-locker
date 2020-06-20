@@ -70,4 +70,13 @@ public class SmartLockerRobotTest {
 
         Assertions.assertEquals(bag, gotBag);
     }
+
+    @Test
+    void should_throw_TicketInvalidException_when_take_bag_given_a_fake_ticket() {
+        Locker firstLocker = new Locker(2);
+        Locker secondLocker = new Locker(2);
+        SmartLockerRobot smartLockerRobot = new SmartLockerRobot(Arrays.asList(firstLocker, secondLocker));
+
+        Assertions.assertThrows(TicketInvalidException.class, () -> smartLockerRobot.takeBag(new Ticket(0)));
+    }
 }
