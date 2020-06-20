@@ -32,4 +32,18 @@ public class SmartLockerRobotTest {
         Assertions.assertNotNull(ticket);
         Assertions.assertTrue(secondLocker.isReleasedTicket(ticket));
     }
+
+    @Test
+    void should_return_ticket_and_store_bag_to_first_locker_when_store_bag_given_first_locker_have_same_free_space_with_second_locker() {
+        Locker firstLocker = new Locker(2);
+        Locker secondLocker = new Locker(2);
+        firstLocker.storeBag(new Bag(""));
+        secondLocker.storeBag(new Bag(""));
+        SmartLockerRobot smartLockerRobot = new SmartLockerRobot(Arrays.asList(firstLocker, secondLocker));
+
+        Ticket ticket = smartLockerRobot.storeBag(new Bag("1"));
+
+        Assertions.assertNotNull(ticket);
+        Assertions.assertTrue(firstLocker.isReleasedTicket(ticket));
+    }
 }
