@@ -135,4 +135,17 @@ public class LockerRobotManagerTest {
             robotManager.storeBag(new Bag(""));
         });
     }
+
+    @Test
+    void should_take_the_true_bag_when_take_bag_given_robot_manager_has_one_robot_has_no_locker_ticket_is_valid() {
+        List<Locker> lockers = Arrays.asList(new Locker(1));
+        PrimaryLockerRobot robot1 = new PrimaryLockerRobot(lockers);
+        LockerRobotManager robotManager = new LockerRobotManager(Arrays.asList(robot1), Arrays.asList());
+        Bag bag = new Bag("");
+        Ticket ticket = robotManager.storeBag(bag);
+
+        Bag gotBag = robotManager.takeBag(ticket);
+
+        Assertions.assertEquals(bag, gotBag);
+    }
 }

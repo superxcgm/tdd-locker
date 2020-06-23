@@ -25,4 +25,12 @@ public class LockerRobotManager {
 
         throw new LockerFullException();
     }
+
+    public Bag takeBag(Ticket ticket) {
+        for (LockerRobot robot: robots) {
+            return robot.takeBag(ticket);
+        }
+
+        return null;
+    }
 }
