@@ -28,9 +28,11 @@ public class LockerRobotManager {
 
     public Bag takeBag(Ticket ticket) {
         for (LockerRobot robot: robots) {
-            return robot.takeBag(ticket);
+            if (robot.checkTicketIsMine(ticket)) {
+                return robot.takeBag(ticket);
+            }
         }
 
-        return null;
+        throw  new TicketInvalidException();
     }
 }
