@@ -39,4 +39,22 @@ public class LockerRobotManagerTest {
         Assertions.assertNotNull(ticket);
         Assertions.assertTrue(robot2.checkTicketIsMine(ticket));
     }
+
+    @Test
+    void should_throw_LockerFullException_when_store_bag_given_robot_manager_has_2_robot_no_locker_robots_all_full() {
+        List<Locker> lockers = Arrays.asList(new Locker(1));
+        List<Locker> lockers1 = Arrays.asList(new Locker(1));
+        PrimaryLockerRobot robot1 = new PrimaryLockerRobot(lockers);
+        PrimaryLockerRobot robot2 = new PrimaryLockerRobot(lockers1);
+        List<LockerRobot> robots = Arrays.asList(robot1, robot2);
+        LockerRobotManager robotManager = new LockerRobotManager(robots, null);
+        Bag bag = new Bag("");
+        Bag bag1 = new Bag("");
+        robotManager.storeBag(bag);
+        robotManager.storeBag(bag1);
+
+        Assertions.assertThrows(LockerFullException.class, () -> {
+            robotManager.storeBag(bag1);
+        });
+    }
 }
