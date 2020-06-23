@@ -2,12 +2,12 @@ package com.thoughtworks;
 
 import java.util.List;
 
-public class PrimaryLockerRobot {
-    private List<Locker> lockers;
+public class PrimaryLockerRobot extends LockerRobot {
     public PrimaryLockerRobot(List<Locker> lockers) {
-        this.lockers = lockers;
+        super(lockers);
     }
 
+    @Override
     public Ticket storeBag(Bag bag) {
         for (Locker locker: lockers) {
             if (locker.available()) {
@@ -15,14 +15,5 @@ public class PrimaryLockerRobot {
             }
         }
         throw new LockerFullException();
-    }
-
-    public Bag takeBag(Ticket ticket) {
-        for (Locker locker: lockers) {
-            if (locker.isReleasedTicket(ticket)) {
-                return locker.takeBag(ticket);
-            }
-        }
-        throw new TicketInvalidException();
     }
 }

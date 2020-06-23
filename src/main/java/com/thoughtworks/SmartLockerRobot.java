@@ -2,13 +2,12 @@ package com.thoughtworks;
 
 import java.util.List;
 
-public class SmartLockerRobot {
-    private List<Locker> lockers;
-
+public class SmartLockerRobot extends LockerRobot{
     public SmartLockerRobot(List<Locker> lockers) {
-        this.lockers = lockers;
+        super(lockers);
     }
 
+    @Override
     public Ticket storeBag(Bag bag) {
         Locker maxFreeSpaceLocker = null;
 
@@ -21,15 +20,5 @@ public class SmartLockerRobot {
         }
 
         return maxFreeSpaceLocker.storeBag(bag);
-    }
-
-    public Bag takeBag(Ticket ticket) {
-        for (Locker locker : lockers) {
-            if (locker.isReleasedTicket(ticket)) {
-                return locker.takeBag(ticket);
-            }
-        }
-
-        throw new TicketInvalidException();
     }
 }
