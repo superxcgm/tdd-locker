@@ -4,8 +4,10 @@ import java.util.List;
 
 public class LockerRobotManager {
     private List<LockerRobot> robots;
-    public LockerRobotManager(List<LockerRobot> robots, Object o) {
+    private List<Locker> lockers;
+    public LockerRobotManager(List<LockerRobot> robots, List<Locker> lockers) {
         this.robots = robots;
+        this.lockers = lockers;
     }
 
     public Ticket storeBag(Bag bag) {
@@ -13,6 +15,10 @@ public class LockerRobotManager {
             if (robot.available()) {
                 return robot.storeBag(bag);
             }
+        }
+
+        for (Locker locker: lockers) {
+            return locker.storeBag(bag);
         }
 
         throw new LockerFullException();
