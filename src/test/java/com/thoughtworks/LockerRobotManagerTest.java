@@ -98,7 +98,7 @@ public class LockerRobotManagerTest {
     }
 
     @Test
-    void should_return_ticket_and_the_bag_stored_in_fist_robot_locker_when_store_bag_given_robot_manager_has_one_robot_has_one_locker_robot_locker_not_full() {
+    void should_return_ticket_and_the_bag_stored_in_first_robot_locker_when_store_bag_given_robot_manager_has_one_robot_has_one_locker_robot_locker_not_full() {
         List<Locker> lockers = Arrays.asList(new Locker(1));
         List<Locker> lockers1 = Arrays.asList(new Locker(1));
         PrimaryLockerRobot robot1 = new PrimaryLockerRobot(lockers);
@@ -109,5 +109,16 @@ public class LockerRobotManagerTest {
         Assertions.assertTrue(robot1.checkTicketIsMine(ticket));
     }
 
+    @Test
+    void should_return_ticket_and_the_bag_stored_in_first_locker_when_store_bag_given_robot_manager_has_one_robot_has_one_locker_robot_locker_is_full() {
+        List<Locker> lockers = Arrays.asList(new Locker(1));
+        List<Locker> lockers1 = Arrays.asList(new Locker(1));
+        PrimaryLockerRobot robot1 = new PrimaryLockerRobot(lockers);
+        LockerRobotManager robotManager = new LockerRobotManager(Arrays.asList(robot1), lockers1);
+        robotManager.storeBag(new Bag(""));
 
+        Ticket ticket = robotManager.storeBag(new Bag(""));
+
+        Assertions.assertTrue(lockers1.get(0).isReleasedTicket(ticket));
+    }
 }
