@@ -33,6 +33,12 @@ public class LockerRobotManager {
             }
         }
 
+        for (Locker locker: lockers) {
+            if (locker.isReleasedTicket(ticket)) {
+                return locker.takeBag(ticket);
+            }
+        }
+
         throw  new TicketInvalidException();
     }
 }
