@@ -19,4 +19,13 @@ public abstract class LockerRobot {
         }
         throw new TicketInvalidException();
     }
+
+    public boolean checkTicketIsMine(Ticket ticket) {
+        for (Locker locker: lockers) {
+            if (locker.isReleasedTicket(ticket)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
