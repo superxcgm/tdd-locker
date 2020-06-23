@@ -9,6 +9,11 @@ public class LockerRobotManager {
     }
 
     public Ticket storeBag(Bag bag) {
-        return robots.get(0).storeBag(bag);
+        for (LockerRobot robot: robots) {
+            if (robot.available()) {
+                return robot.storeBag(bag);
+            }
+        }
+        return null;
     }
 }

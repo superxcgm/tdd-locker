@@ -28,4 +28,13 @@ public abstract class LockerRobot {
         }
         return false;
     }
+
+    public boolean available() {
+        for (Locker locker: lockers) {
+            if (locker.available()) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
