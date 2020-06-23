@@ -70,5 +70,16 @@ public class LockerRobotManagerTest {
         Assertions.assertTrue(lockers.get(0).isReleasedTicket(ticket));
     }
 
+    @Test
+    void should_return_ticket_and_the_bag_stored_in_second_locker_when_store_bag_given_robot_manager_no_robot_has_two_lockers_locker1_is_full() {
+        List<Locker> lockers = Arrays.asList(new Locker(1), new Locker(1));
+        LockerRobotManager robotManager = new LockerRobotManager(Arrays.asList(), lockers);
+        Bag bag = new Bag("");
+        Bag bag1 = new Bag("");
+        robotManager.storeBag(bag);
+        Ticket ticket = robotManager.storeBag(bag1);
 
+        Assertions.assertNotNull(ticket);
+        Assertions.assertTrue(lockers.get(1).isReleasedTicket(ticket));
+    }
 }

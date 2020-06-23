@@ -18,7 +18,9 @@ public class LockerRobotManager {
         }
 
         for (Locker locker: lockers) {
-            return locker.storeBag(bag);
+            if (locker.available()) {
+                return locker.storeBag(bag);
+            }
         }
 
         throw new LockerFullException();
