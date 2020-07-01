@@ -67,14 +67,14 @@ public class LockerRobotManager {
     public String generateReport() {
         String report = "";
         report += "M " + getAvailableCapacity() + " " + getCapacity() + "\n";
+        for (Locker locker : lockers) {
+            report += "  L " + locker.getAvailableCapacity() + " " + locker.getCapacity() + "\n";
+        }
         for (LockerRobot robot : robots) {
             report += "  R " + robot.getAvailableCapacity() + " " + robot.getCapacity() + "\n";
             for (Locker locker : robot.lockers) {
                 report += "    L " + locker.getAvailableCapacity() + " " + locker.getCapacity() + "\n";
             }
-        }
-        for (Locker locker : lockers) {
-            report += "  L " + locker.getAvailableCapacity() + " " + locker.getCapacity() + "\n";
         }
         return report;
     }

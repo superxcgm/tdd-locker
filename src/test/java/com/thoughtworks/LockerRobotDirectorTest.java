@@ -60,4 +60,21 @@ public class LockerRobotDirectorTest {
                 "  L 1 1\n";
         Assertions.assertEquals(wantReport, gotReport);
     }
+
+    @Test
+    void should_print_correct_report_when_print_report_given_LockerRobotDirect_manage_1_manager_and_manager_manage_one_locker_and_one_robot() {
+        Locker firstLocker = new Locker(1);
+        firstLocker.storeBag(new Bag(""));
+        PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(Collections.singletonList(new Locker(1)));
+        LockerRobotManager lockerRobotManager = new LockerRobotManager(Collections.singletonList(primaryLockerRobot), Collections.singletonList(firstLocker));
+        LockerRobotDirector director = new LockerRobotDirector(lockerRobotManager);
+
+        String gotReport = director.printReport();
+
+        String wantReport = "M 1 2\n" +
+                "  L 0 1\n" +
+                "  R 1 1\n" +
+                "    L 1 1\n";
+        Assertions.assertEquals(wantReport, gotReport);
+    }
 }
