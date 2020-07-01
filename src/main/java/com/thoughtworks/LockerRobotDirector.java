@@ -1,13 +1,19 @@
 package com.thoughtworks;
 
-public class LockerRobotDirector {
-    private final LockerRobotManager lockerRobotManager;
+import java.util.List;
 
-    public LockerRobotDirector(LockerRobotManager lockerRobotManager) {
-        this.lockerRobotManager = lockerRobotManager;
+public class LockerRobotDirector {
+    private final List<LockerRobotManager> lockerRobotManagers;
+
+    public LockerRobotDirector(List<LockerRobotManager> lockerRobotManagers) {
+        this.lockerRobotManagers = lockerRobotManagers;
     }
 
     public String printReport() {
-        return lockerRobotManager.generateReport();
+        String report = "";
+        for (LockerRobotManager manager : lockerRobotManagers) {
+            report += manager.generateReport();
+        }
+        return report;
     }
 }

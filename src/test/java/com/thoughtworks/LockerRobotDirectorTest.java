@@ -14,7 +14,7 @@ public class LockerRobotDirectorTest {
         PrimaryLockerRobot firstRobot = new PrimaryLockerRobot(Collections.singletonList(firstLocker));
         PrimaryLockerRobot secondRobot = new PrimaryLockerRobot(Collections.singletonList(new Locker(1)));
         LockerRobotManager lockerRobotManager = new LockerRobotManager( Arrays.asList(firstRobot, secondRobot), Collections.emptyList());
-        LockerRobotDirector director = new LockerRobotDirector(lockerRobotManager);
+        LockerRobotDirector director = new LockerRobotDirector(Collections.singletonList(lockerRobotManager));
 
         String gotReport = director.printReport();
 
@@ -34,7 +34,7 @@ public class LockerRobotDirectorTest {
         Locker secondLocker = new Locker(1);
         PrimaryLockerRobot robot = new PrimaryLockerRobot(Arrays.asList(firstLocker, secondLocker));
         LockerRobotManager lockerRobotManager = new LockerRobotManager(Collections.singletonList(robot), Collections.emptyList());
-        LockerRobotDirector director = new LockerRobotDirector(lockerRobotManager);
+        LockerRobotDirector director = new LockerRobotDirector(Collections.singletonList(lockerRobotManager));
 
         String gotReport = director.printReport();
 
@@ -51,7 +51,7 @@ public class LockerRobotDirectorTest {
         firstLocker.storeBag(new Bag(""));
         Locker secondLocker = new Locker(1);
         LockerRobotManager lockerRobotManager = new LockerRobotManager(Collections.emptyList(), Arrays.asList(firstLocker, secondLocker));
-        LockerRobotDirector director = new LockerRobotDirector(lockerRobotManager);
+        LockerRobotDirector director = new LockerRobotDirector(Collections.singletonList(lockerRobotManager));
 
         String gotReport = director.printReport();
 
@@ -67,7 +67,7 @@ public class LockerRobotDirectorTest {
         firstLocker.storeBag(new Bag(""));
         PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(Collections.singletonList(new Locker(1)));
         LockerRobotManager lockerRobotManager = new LockerRobotManager(Collections.singletonList(primaryLockerRobot), Collections.singletonList(firstLocker));
-        LockerRobotDirector director = new LockerRobotDirector(lockerRobotManager);
+        LockerRobotDirector director = new LockerRobotDirector(Collections.singletonList(lockerRobotManager));
 
         String gotReport = director.printReport();
 
@@ -75,6 +75,24 @@ public class LockerRobotDirectorTest {
                 "  L 0 1\n" +
                 "  R 1 1\n" +
                 "    L 1 1\n";
+        Assertions.assertEquals(wantReport, gotReport);
+    }
+
+    @Test
+    void should_print_correct_report_when_print_report_given_LockerRobotDirect_manage_2_manager_and_manager_manage_one_locker() {
+        Locker firstLocker = new Locker(1);
+        Locker secondLocker = new Locker(1);
+        firstLocker.storeBag(new Bag(""));
+        LockerRobotManager firstManager = new LockerRobotManager(Collections.emptyList(), Collections.singletonList(firstLocker));
+        LockerRobotManager secondManager = new LockerRobotManager(Collections.emptyList(), Collections.singletonList(secondLocker));
+        LockerRobotDirector director = new LockerRobotDirector(Arrays.asList(firstManager, secondManager));
+
+        String gotReport = director.printReport();
+
+        String wantReport = "M 0 1\n" +
+                "  L 0 1\n" +
+                "M 1 1\n" +
+                "  L 1 1\n";
         Assertions.assertEquals(wantReport, gotReport);
     }
 }
