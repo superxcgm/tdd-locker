@@ -37,4 +37,20 @@ public abstract class LockerRobot {
         }
         return false;
     }
+
+    public int getCapacity() {
+        int totalCapacity = 0;
+        for (Locker locker: lockers) {
+            totalCapacity += locker.getCapacity();
+        }
+        return totalCapacity;
+    }
+
+    public int getAvailableCapacity() {
+        int totalAvailableCapacity = 0;
+        for (Locker locker: lockers) {
+            totalAvailableCapacity += locker.getAvailableCapacity();
+        }
+        return totalAvailableCapacity;
+    }
 }

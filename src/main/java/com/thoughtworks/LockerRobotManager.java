@@ -41,4 +41,32 @@ public class LockerRobotManager {
 
         throw  new TicketInvalidException();
     }
+
+    public int getAvailableCapacity() {
+        int totalAvailableCapacity = 0;
+        for (LockerRobot robot : robots) {
+            totalAvailableCapacity += robot.getAvailableCapacity();
+        }
+        return totalAvailableCapacity;
+    }
+
+    public int getCapacity() {
+        int totalCapacity = 0;
+        for (LockerRobot robot : robots) {
+            totalCapacity += robot.getCapacity();
+        }
+        return totalCapacity;
+    }
+
+    public String generateReport() {
+        String report = "";
+        report += "M " + getAvailableCapacity() + " " + getCapacity() + "\n";
+        for (LockerRobot robot : robots) {
+            report += "  R " + robot.getAvailableCapacity() + " " + robot.getCapacity() + "\n";
+            for (Locker locker : robot.lockers) {
+                report += "    L " + locker.getAvailableCapacity() + " " + locker.getCapacity() + "\n";
+            }
+        }
+        return report;
+    }
 }

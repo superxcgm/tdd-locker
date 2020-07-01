@@ -36,7 +36,11 @@ public class Locker {
         return ticketBagMap.containsKey(ticket);
     }
 
-    public int getFreeSpace() {
+    public int getAvailableCapacity() {
         return capacity - ticketBagMap.size();
+    }
+
+    public int getCapacity() {
+        return capacity;
     }
 }

@@ -176,7 +176,7 @@ Given：LockerRobotDirector管理1个Manager，Manager管理1个robot, robot管�
 When：打印报表
 Then：输出：
 M 1 2
-  R 0 2
+  R 1 2
     L 0 1
     L 1 1 
 

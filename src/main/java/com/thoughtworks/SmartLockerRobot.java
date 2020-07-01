@@ -14,7 +14,7 @@ public class SmartLockerRobot extends LockerRobot{
         for (Locker locker : lockers) {
             if (maxFreeSpaceLocker == null) {
                 maxFreeSpaceLocker = locker;
-            } else if (locker.getFreeSpace() > maxFreeSpaceLocker.getFreeSpace()) {
+            } else if (locker.getAvailableCapacity() > maxFreeSpaceLocker.getAvailableCapacity()) {
                 maxFreeSpaceLocker = locker;
             }
         }
