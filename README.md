@@ -203,11 +203,3 @@ M 0 1
   L 0 1
 M 1 1
   L 1 1
-
-Given：有一个没有被LockerRobotDirector管理的locker
-When：打印报表
-Then： 输出的报表不包含这个locker
-
-Given：有一个没有被LockerRobotDirector管理的robot
-When：打印报表
-Then： 输出的报表不包含这个robot
