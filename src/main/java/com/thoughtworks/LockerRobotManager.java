@@ -47,6 +47,9 @@ public class LockerRobotManager {
         for (LockerRobot robot : robots) {
             totalAvailableCapacity += robot.getAvailableCapacity();
         }
+        for (Locker locker : lockers) {
+            totalAvailableCapacity += locker.getAvailableCapacity();
+        }
         return totalAvailableCapacity;
     }
 
@@ -54,6 +57,9 @@ public class LockerRobotManager {
         int totalCapacity = 0;
         for (LockerRobot robot : robots) {
             totalCapacity += robot.getCapacity();
+        }
+        for (Locker locker : lockers) {
+            totalCapacity += locker.getCapacity();
         }
         return totalCapacity;
     }
@@ -66,6 +72,9 @@ public class LockerRobotManager {
             for (Locker locker : robot.lockers) {
                 report += "    L " + locker.getAvailableCapacity() + " " + locker.getCapacity() + "\n";
             }
+        }
+        for (Locker locker : lockers) {
+            report += "  L " + locker.getAvailableCapacity() + " " + locker.getCapacity() + "\n";
         }
         return report;
     }
