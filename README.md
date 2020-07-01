@@ -166,40 +166,49 @@ Then：取包失败，提示“票据不合法”
 Given：LockerRobotDirector管理1个Manager，Manager管理2个robot, 第一个robot管理1个locker，可用容量为0，总容量为1。第二个robot管理1个locker，可用容量为1，总容量为1。
 When：打印报表
 Then：输出：
+```
 M 1 2
   R 0 1
     L 0 1
   R 1 1
     L 1 1
+```
 
 Given：LockerRobotDirector管理1个Manager，Manager管理1个robot, robot管理2个locker，第一个locker的可用容量为0，总容量为1。第二个locker的可用容量为1，总容量为1。
 When：打印报表
 Then：输出：
+```
 M 1 2
   R 1 2
     L 0 1
     L 1 1 
+```
 
 Given：LockerRobotDirector管理1个Manager，Manager管理2个locker，第一个locker的可用容量为0，总容量为1。第二个locker的可用容量为1，总容量为1。
 When：打印报表
 Then：输出：
+```
 M 1 2
   L 0 1
   L 1 1
+```
 
 Given：LockerRobotDirector管理1个Manager，Manager管理1个locker，1个robot，locker的可用容量为0，总容量为1，robot管理1个locker，可用容量为1，总容量为1。
 When：打印报表
 Then：输出：
+```
 M 1 2
   L 0 1
   R 1 1
   	L 1 1
-
+```
 
 Given：LockerRobotDirector管理2个Manager，第一个Manager管理一个locker，locker的可用容量为0，总容量为1，第二个Manager管理一个Locker，可用容量为1，总容量为1。
 When：打印报表
 Then： 输出
+```
 M 0 1
   L 0 1
 M 1 1
   L 1 1
+```
